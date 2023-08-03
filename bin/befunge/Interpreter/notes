@@ -1,0 +1,158 @@
+ 
+
+ Interpreter Design
+
+ step() {
+		while(program is runnning)
+			read next instruction
+			execute it
+ }
+
+
+ Design Decision - We will basically follow the code written below as a guide to making the interpreter
+
+ Specific Choices
+ 	Getting the current instruction will involve turning it into an object
+	Then we can execute it making use of polymorphism
+
+ Decisions To Make
+  1) Should instructions be objects
+  		If so: 
+			When should it be created - Call another class
+			How should it be created - A simple switch case suffices
+			How to handle the passing of necessary information for its execution - If using inheritance, we have to pass everything
+			(Solved :) )
+		If not so: 
+			How to prevent the code from looking complex - We choose to make instructions as objects (if only to use inheritance)
+	
+  2) What exactly is the state of the program 
+     And how is it related to the information a command needs to execute itself
+
+
+ step() {
+	if(program is not running)
+		stop here itself
+
+	get the current instruction from the program
+
+	consult the mode
+		1) Command Mode: 
+			  Execute the instruction
+		2) String Mode:
+			  If the symbol is a quote, execute it
+			  Otherwise push it onto the stack
+
+    Update the PC (handle possible overflow)
+ }
+
+ 
+
+
+
+Types of Instructions
+	Arithmetic - Stack
+	Logical - Stack
+	Direction - PCdir
+	If - Stack, PCdir
+	Stack - Stack
+	String - Mode
+	Bridge - Forced PCIncrement ??
+	Program IO - Program, Stack
+	User IO - StdStreams, Stack
+	Digit - Stack
+	End - Running ? 
+	
+
+All things in the interpreter state
+ 		Current condition of Program - Needed
+ 		Stack - Needed
+ 		Value of PC - Not needed
+ 		Direction of PC - Needed
+		Is Program running or not - Needed
+		Mode of the interpreter	- Needed
+		Standard Input/Output streams - Needed
+
+
+New Abstraction !! - Not the execution state, it is the befunge machine
+   Components
+   Instruction Memory - Initialized to nothing (Have to load a program) - We need a loader and a writer
+   Instruction Pointer - Can be initialized provided size is known
+   Befunge Stack - Can be initiazlied
+   Mode - Can be initialized
+   Input Output methods - No initialization Needed
+   On/Off flag - Can be initialized
+
+
+The Befunge Machine
+	Structural Components - Explicit
+		Instruction Pointer
+		Instruction Memory
+		Befunge Stack
+		Input / Output methods
+		Mode
+		On/Off flag
+	Functional Components - Implicit 
+		What does the symbol mean
+		What action does it map to
+		How to execute that action
+	Methods created for usage
+		step(), step(n), run()
+		reset(), stop()
+		clear(), load()
+		
+		
+	
+
+This befunge machine is the virtual machine that instructions will execute on
+
+
+
+Thinking about Execution State
+	An execution state is the set of all things needed to be known in order to continue the execution of the program from
+	that point onwards - 
+		This is a nice abstract idea
+
+	so step() is basically a function
+		step: Exection state -> Execution State
+		This is also a nice unified idea
+
+
+What exactly are the things in the execution state ? 
+
+Instruction Pointer is an abstraction - Implemented
+	value
+	direction
+	bounds
+	update()
+	setDirection()
+
+Stack is an abstraction - Implemented
+	push()
+	pop()
+	isempty()
+	size
+
+Program is an abstraction - Implemented
+	read()
+	write()
+
+Streams are abstractions - 
+	readInt()
+	readChar()
+	writeInt()
+	writeChar()
+
+Mode - class or not ??  (Made it an enum)
+Running is a boolean
+
+
+
+	
+
+Step 1: Completed
+	Write the components
+	Write the instructions
+	Write the machine aka interpreter
+Step 2: Next step
+	Write the program loaders	
+	
