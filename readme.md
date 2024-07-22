@@ -28,13 +28,7 @@ A Java-based interpreter for the Befunge esolang, featuring a visual stack and e
     cd Befunge/src
     ```
 
-3. **Compile the Code**:
-
-    ```bash
-    javac befunge/Interpreter/*.java
-    ```
-
-4. **Run the Interpreter**:
+3. **Run the Interpreter**:
 
     ```bash
     java befunge.Interpreter.HomeGUI
@@ -42,16 +36,9 @@ A Java-based interpreter for the Befunge esolang, featuring a visual stack and e
 
 ## How to Use
 
-1. **Open the Interpreter**:
-   - Launch the interpreter with the following command:
+1. **Load a Befunge Program**: Use the GUI interface to open and load a Befunge program file.
 
-    ```bash
-    java befunge.Interpreter.HomeGUI
-    ```
-
-2. **Load a Befunge Program**: Use the GUI interface to open and load a Befunge program file.
-
-3. **Execute the Program**: Use the provided controls to step through the execution and view the visual stack representation.
+2. **Execute the Program**: Use the provided controls to step through the execution and view the visual stack representation.
 
 ## Images
 
